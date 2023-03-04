@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1 class="text-center">Dashboard</h1>
+    <div id="edit"></div>
+    <% for (let i = 0; i < users.length; i++) { %>
+     <div id="email"><%= users[i].email %></div>
+    <% } %>
+    
+    <div class="m-5"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.min.js"></script>
+    <script>
+      var n=80;
+      for(var i = 1; i<n; i++) {
+   document.body.innerHTML += '<div id="dynamic"></div>'
+      }  
+      const socket = io();
+      const email = document.querySelectorAll("#email");
+      const dname = document.querySelectorAll("#dynamic");
+      
+      socket.on("onlineUsers", function (users) {
+    
+      for (let i = 0; i < email.length; i++) {
+          for(let j = 0; j < users.length; j++){
+           if (email[i].innerHTML == users[j]) {
+      //           status[i].classList.remove("offline");
+      //         status[i].classList.add("online");
+               dname[i].innerHTML = "Connected Emails: ["+users[j]+"]";
+            }
+          }
+         }
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+    
